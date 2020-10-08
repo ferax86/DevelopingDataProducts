@@ -1,0 +1,36 @@
+---
+title: "Markdown Presentation & Plotly- Roberto Feraboli"
+author: "Roberto Feraboli"
+date: "8/10/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+
+```{r}
+name_player<-rep(c("Suarez","Ronalso","Ibrahimovic"),each=10)
+scores<-sample(15:25,30,replace=TRUE)
+year<-rep(c(2010,2011,2012,2013,2014,2015,2016,2017,2018,2019),3)
+
+dataset<-cbind(name_player,scores,year)
+dataset<-data.frame(dataset)
+dataset$scores<-as.numeric(dataset$scores)
+
+
+str(dataset)
+
+library(plotly)
+library(ggplot2)
+
+graph<-ggplot(dataset)+ geom_line(aes(x=year, y=scores, group=factor(name_player),colour=factor(name_player)))
+
+(gg<-ggplotly(graph))
+```
+
+
